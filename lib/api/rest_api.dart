@@ -13,8 +13,6 @@ Future<dynamic> api(
   final uri = Uri.parse(url);
   // 회원가입 할때 multipart 로 해야함
   final isMultipart = headers?['Content-Type'] == 'multipart/form-data';
-  // HTTP를 요청하는 객체 생성.
-  final client = HttpClient();
   /*
       try catch finally 예외 처리 문법
       try 에 있는 코드 실행 -> 오류발생시 catch 실행 -> 다 하고 finally 실행
