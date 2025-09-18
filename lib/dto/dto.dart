@@ -14,4 +14,9 @@ class ProfileDto {
     required this.stepTarget,
     required this.waterTarget,
   });
+
+  @override
+  String toString() {
+    return 'ProfileDto{username: $username, height: $height, weight: $weight, brith: $brith, stepTarget: $stepTarget, waterTarget: $waterTarget}';
+  }
 }

@@ -1,15 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:myhealthdata/dto/dto.dart';
-
 import '../api/rest_api.dart';
 import '../util/variable.dart';
-import '../screen/s_sign_in.dart';
 
 // 토큰
 final accessToken = 'ddffqwfffffffff';
 
 // ==================== 로그인 [POST] ==================== //
-Future<bool> signIn(String userId, String password) async {
+Future<bool> apiSignIn(String userId, String password) async {
   try {
     final signIn = await api(
       'POST',
@@ -30,7 +27,7 @@ Future<bool> signIn(String userId, String password) async {
 }
 
 // ==================== 회원가입 [POST] ==================== //
-Future<bool> signUp(String userId, String username, String password) async {
+Future<bool> apiSignUp(String userId, String username, String password) async {
   try {
     final signUp = await api(
       'POST',
@@ -50,7 +47,7 @@ Future<bool> signUp(String userId, String username, String password) async {
 }
 
 // ==================== 프로필 정보 업데이트 [PUT] ==================== //
-Future<void> putProfile() async {
+Future<void> apiPutProfile() async {
   final resultPutProfile = await api(
     'PUT',
     'http://arkenzo.dothome.co.kr/myhealth/profile',
@@ -70,11 +67,11 @@ Future<void> putProfile() async {
   );
   // 확인용
   print(resultPutProfile);
-  putProfileInfor = resultPutProfile;
+  putProfileInfo = resultPutProfile;
 }
 
 // ==================== 프로필 정보 확인 [GET] ==================== //
-Future<void> getProfile() async {
+Future<void> apiGetProfile() async {
   try {
     final getProfile = await api(
       'GET',
@@ -93,14 +90,14 @@ Future<void> getProfile() async {
       waterTarget: getProfile['data']['waterTarget'],
     );
     print('겟프로필 : $getProfile');
-    getProfileInfor = getProfile;
+    getProfileInfo = getProfile;
   } catch (e) {
     print('에러 $e');
   }
 }
 
 // ==================== Water [GET] ==================== //
-Future<void> GetWater() async {
+Future<void> apiGetWater() async {
   try {
     final getWater = await api(
       'GET',
@@ -113,14 +110,15 @@ Future<void> GetWater() async {
     // 확인용
     print('겟 워터 : $getWater');
     // 전역으로 water 현황 전달
-    getWaterInfor = getWater;
+    getWaterInfo = getWater;
   } catch (e) {
     print('에러 $e');
   }
 }
 
+
 // ==================== Water [POST] ==================== //
-Future<void> PostWater(int plusWater) async {
+Future<void> apiPostWater(int plusWater) async {
   try {
     final postWater = await api(
       'POST',
@@ -131,23 +129,40 @@ Future<void> PostWater(int plusWater) async {
       },
       body: {
         // (현제 water 현황 + 추가한 량 100 or 250) 을 보냄 / .clamp 로 최대치를 목표치로 설정. 목표 이상안되게.
-        "water": (getWaterInfor['data']['water'] + plusWater).clamp(
+        "water": (getWaterInfo['data']['water'] + plusWater).clamp(
           0,
-          getProfileInfor['data']['waterTarget'],
+          getProfileInfo['data']['waterTarget'],
         ),
       },
     );
     // 확인용
     print('포스트 워터 : $postWater');
     // 업데이트 한 현황을 다시 get 해옴
-    await GetWater();
+    await apiGetWater();
   } catch (e) {
     print('에러 $e');
   }
 }
 
+// ==================== Step [GET] ==================== //
+Future<void> apiGetStep() async {
+  try {
+    final getStep = await api(
+      'GET',
+      'http://arkenzo.dothome.co.kr/myhealth/step',
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json',
+      },
+    );
+    getStepInfo = getStep;
+  } catch (e) {
+    print('에러: $e');
+  }
+}
+
 // ==================== Step [POST] ==================== //
-Future<void> PostStep(int tmpStepStatus) async {
+Future<void> apiPostStep(int tmpStepStatus) async {
   try {
     final postStep = await api(
       'POST',
@@ -159,28 +174,11 @@ Future<void> PostStep(int tmpStepStatus) async {
       body: {
         'stepCount': tmpStepStatus.clamp(
           0,
-          getProfileInfor['data']['stepTarget'],
+          getProfileInfo['data']['stepTarget'],
         ),
       },
     );
   } catch (e) {
     print('에러 $e');
-  }
-}
-
-// ==================== Step [GET] ==================== //
-Future<void> GetStep() async {
-  try {
-    final getStep = await api(
-      'GET',
-      'http://arkenzo.dothome.co.kr/myhealth/step',
-      headers: {
-        'Authorization': 'Bearer $accessToken',
-        'Content-Type': 'application/json',
-      },
-    );
-    getStepInfor = getStep;
-  } catch (e) {
-    print('에러: $e');
   }
 }

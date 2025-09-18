@@ -66,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 SizedBox(height: 40),
-                Container(
+                SizedBox(
                   width: 450,
                   child: Form(
                     key: _formKey,
@@ -114,13 +114,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             // 유효성 검사
                             if (_formKey.currentState?.validate() ?? false) {
                               // signUp API / 회원가입 APIap
-                              final bool isOk = await signUp(
+                              final bool isOk = await apiSignUp(
                                 signUpUserIdController.text,
                                 signUpUserNameController.text,
                                 signUpPasswordController.text,
                               );
                               if (isOk) {
-                                await getProfile();
+                                await apiGetProfile();
                                 Navigator.pushNamed(
                                   context,
                                   '/profileAndTarget',

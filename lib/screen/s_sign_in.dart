@@ -12,7 +12,6 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
@@ -93,16 +92,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () async {
                     // 로그인 API
                     print(
-                      '프로필 :$getProfileInfor\n물 : $getWaterInfor\n스텝 : $getStepInfor',
+                      '프로필 :$getProfileInfo\n물 : $getWaterInfo\n스텝 : $getStepInfo',
                     );
                     print('username 입력 : $signInUsernameController.text');
                     print('password 입력 : $signInPasswordController.text');
                     if (_formKey.currentState!.validate()) {
-                      bool _isOk = await signIn(signInUsernameController.text, signInPasswordController.text);
-                      if (_isOk) {
-                        await getProfile();
-                        await GetWater();
-                        await GetStep();
+                      final bool isOk = await apiSignIn(
+                        signInUsernameController.text,
+                        signInPasswordController.text,
+                      );
+                      if (isOk) {
+                        await apiGetProfile();
+                        await apiGetWater();
+                        await apiGetStep();
                         Navigator.pushNamed(context, '/HomeScreen');
                       }
                     }

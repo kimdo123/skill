@@ -134,28 +134,28 @@ class _ProfileAndTargetState extends State<ProfileAndTarget> {
                       children: [
                         CustomTextFiled(
                           controller: nickNameController,
-                          text: (getProfileInfor['data']['mberNm'] ?? '사용자 이름').toString(),
+                          text: (getProfileInfo['data']['mberNm'] ?? '사용자 이름').toString(),
                           icon: Icons.person,
                           sufix: '',
                         ),
                         SizedBox(height: 10),
                         CustomTextFiled(
                           controller: heightController,
-                          text: (getProfileInfor['data']['height'] ?? '키').toString(),
+                          text: (getProfileInfo['data']['height'] ?? '키').toString(),
                           icon: Icons.star,
                           sufix: 'cm',
                         ),
                         SizedBox(height: 10),
                         CustomTextFiled(
                           controller: weightController,
-                          text: (getProfileInfor['data']['weight'] ?? '몸무게').toString(),
+                          text: (getProfileInfo['data']['weight'] ?? '몸무게').toString(),
                           icon: Icons.star,
                           sufix: 'kg',
                         ),
                         SizedBox(height: 10),
                         CustomTextFiled(
                           controller: birthdayController,
-                          text: (getProfileInfor['data']['brthdy'] ?? '생일').toString(),
+                          text: (getProfileInfo['data']['brthdy'] ?? '생일').toString(),
                           icon: Icons.star,
                           sufix: '',
                         ),
@@ -185,14 +185,14 @@ class _ProfileAndTargetState extends State<ProfileAndTarget> {
                       children: [
                         CustomTextFiled(
                           controller: targetStepController,
-                          text: (getProfileInfor['data']['stepTarget'] ?? '걸음수').toString(),
+                          text: (getProfileInfo['data']['stepTarget'] ?? '걸음수').toString(),
                           icon: Icons.print,
                           sufix: 'Steps',
                         ),
                         SizedBox(height: 10),
                         CustomTextFiled(
                           controller: targetWaterController,
-                          text: (getProfileInfor['data']['waterTarget'] ?? '물').toString(),
+                          text: (getProfileInfo['data']['waterTarget'] ?? '물').toString(),
                           icon: Icons.water_drop,
                           sufix: 'ml',
                         ),
@@ -203,11 +203,11 @@ class _ProfileAndTargetState extends State<ProfileAndTarget> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState?.validate() ?? false) {
-                        await putProfile();
-                        await getProfile();
-                        await GetWater();
-                        await GetStep();
-                        print(getProfileInfor);
+                        await apiPutProfile();
+                        await apiGetProfile();
+                        await apiGetWater();
+                        await apiGetStep();
+                        print(getProfileInfo);
                         Navigator.pushNamed(context, '/HomeScreen');
                       }
                     },

@@ -24,15 +24,15 @@ class _HomeScreenState extends State<HomeScreen> {
     // pow (A, B) : A 값을 B번 만큼 곱하기 (제곱)
     // A.toStringAsFixed(B) : A 값을 소수점 B 자리까지 반올림 처리 후 문자로
     bmi =
-        getProfileInfor['data']['weight'] /
-        pow(getProfileInfor['data']['height'] * 0.01, 2);
+        getProfileInfo['data']['weight'] /
+        pow(getProfileInfo['data']['height'] * 0.01, 2);
     // water 현황 초기화
-    getWaterInfor?['data']?['water'] = 0;
+    getWaterInfo?['data']?['water'] = 0;
     // step 현황 초기화
-    getStepInfor?['data']?['step'] = 0;
+    getStepInfo?['data']?['step'] = 0;
     // Steps 랜덤 수
     StepPlusRandom();
-    print(getProfileInfor);
+    print(getProfileInfo);
   }
 
   // 걸음수 현황 + 랜덤 더한거 저장하는거
@@ -43,18 +43,18 @@ class _HomeScreenState extends State<HomeScreen> {
    */
   Future<void> StepPlusRandom() async {
     // while : 걸음수 현황이 목표모다 작으면 계속 실행. 아니면 빠짐.
-    while (getStepInfor['data']['step'] <
-        getProfileInfor['data']['stepTarget']) {
+    while (getStepInfo['data']['step'] <
+        getProfileInfo['data']['stepTarget']) {
       // 3초 대기
       await Future.delayed(Duration(seconds: 3));
       // 랜덤 숫자 0~10 생성
       int random = Random().nextInt(11);
       // 걸음 현황 + 랜덤 수
-      tmpStepStatus = getStepInfor['data']['step'] + random;
+      tmpStepStatus = getStepInfo['data']['step'] + random;
       // 현황 업데이트
-      await PostStep(tmpStepStatus);
+      await apiPostStep(tmpStepStatus);
       // 현황 업데이트 된거 가져오기
-      await GetStep();
+      await apiGetStep();
       // 화면 새로고침
       setState(() {});
     }
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Hello ${getProfileInfor['data']['mberNm']},',
+                        'Hello ${getProfileInfo['data']['mberNm']},',
                         style: TextStyle(fontSize: 30),
                       ),
                     ),
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 160,
                       child: Row(
                         children: [
-                          getProfileInfor['data']['sexdstn'] == 'M'
+                          getProfileInfo['data']['sexdstn'] == 'M'
                               ? Icon(Icons.man, size: 100)
                               : Icon(Icons.woman, size: 100),
                           Expanded(
@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Column(
                                       children: [
                                         Text(
-                                          getProfileInfor['data']['height']
+                                          getProfileInfo['data']['height']
                                               .toString(),
                                           style: TextStyle(
                                             fontSize: 32,
@@ -165,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Column(
                                       children: [
                                         Text(
-                                          getProfileInfor['data']['weight']
+                                          getProfileInfo['data']['weight']
                                               .toString(),
                                           style: TextStyle(
                                             fontSize: 32,
@@ -245,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 // 현재 수치
                                 Text(
-                                  getStepInfor['data']['step'].toString(),
+                                  getStepInfo['data']['step'].toString(),
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -253,13 +253,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 // 목표 수치
                                 Text(
-                                  '/${getProfileInfor['data']['stepTarget'].toString()} Steps',
+                                  '/${getProfileInfo['data']['stepTarget'].toString()} Steps',
                                   style: TextStyle(fontSize: 16),
                                 ),
                               ],
                             ),
                             // Steps 그래프
-                            GrapgWidgetSteps(getStepInfor['data']['step']),
+                            GrapgWidgetSteps(getStepInfo['data']['step']),
                           ],
                         ),
                       ),
@@ -389,14 +389,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               Row(
                                 children: [
                                   Text(
-                                    getWaterInfor['data']['water'].toString(),
+                                    getWaterInfo['data']['water'].toString(),
                                     style: TextStyle(
                                       fontSize: 30,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
-                                    ' / ${getProfileInfor['data']['waterTarget']} ml',
+                                    ' / ${getProfileInfo['data']['waterTarget']} ml',
                                     style: TextStyle(fontSize: 20),
                                   ),
                                 ],
@@ -409,10 +409,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ElevatedButton(
                                       onPressed: () async {
                                         // 목표량 = 현황 << 맞으면 더이상 api 요청 X
-                                        if (getWaterInfor['data']['water'] !=
-                                            getProfileInfor['data']['waterTarget']) {
+                                        if (getWaterInfo['data']['water'] !=
+                                            getProfileInfo['data']['waterTarget']) {
                                           // 물 업데이트. 파라미터로 100 보내기
-                                          await PostWater(100);
+                                          await apiPostWater(100);
                                           // 화면 업데이트
                                           setState(() {});
                                         }
@@ -435,9 +435,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ElevatedButton(
                                       // 위에 참고
                                       onPressed: () async {
-                                        if (getWaterInfor['data']['water'] !=
-                                            getProfileInfor['data']['waterTarget']) {
-                                          await PostWater(250);
+                                        if (getWaterInfo['data']['water'] !=
+                                            getProfileInfo['data']['waterTarget']) {
+                                          await apiPostWater(250);
                                           setState(() {});
                                         } else {
                                           print('물 최대치');
@@ -563,7 +563,7 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, constraints) {
           final barWidth = constraints.maxWidth;
           final clampedValue =
-              ((stepStatus) / (getProfileInfor['data']['stepTarget'])).clamp(
+              ((stepStatus) / (getProfileInfo['data']['stepTarget'])).clamp(
                 0.0,
                 1.0,
               );

@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 
 
 // 유저 정보
-Map<String, dynamic> getProfileInfor = {};
-Map<String, dynamic> getWaterInfor = {};
-Map<String, dynamic> getStepInfor = {};
-Map<String, dynamic> putProfileInfor = {};
+Map<String, dynamic> getProfileInfo = {};
+Map<String, dynamic> getWaterInfo = {};
+Map<String, dynamic> getStepInfo = {};
+Map<String, dynamic> putProfileInfo = {};
 
 
 // Profile & Target
