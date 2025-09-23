@@ -5,14 +5,14 @@ import 'package:myhealthdata/screen/bottom_navigation_bar/s_home.dart';
 import 'package:myhealthdata/screen/bottom_navigation_bar/s_my_page.dart';
 import 'package:myhealthdata/screen/bottom_navigation_bar/s_workout.dart';
 
-class HomeScreenNB extends StatefulWidget {
-  const HomeScreenNB({super.key});
+class HomeScreenNavigation extends StatefulWidget {
+  const HomeScreenNavigation({super.key});
 
   @override
-  State<HomeScreenNB> createState() => _HomeScreenNBState();
+  State<HomeScreenNavigation> createState() => _HomeScreenNavigationState();
 }
 
-class _HomeScreenNBState extends State<HomeScreenNB> {
+class _HomeScreenNavigationState extends State<HomeScreenNavigation> {
   int _selectedIdx = 0;
 
   List<Widget> get _pages => [

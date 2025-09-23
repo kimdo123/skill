@@ -92,7 +92,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () async {
                     // 로그인 API
                     print(
-                      '프로필 :$getProfileInfo\n물 : $getWaterInfo\n스텝 : $getStepInfo',
+                      '프로필 : $getProfileInfo\n'
+                      '물 : $getWaterInfo\n'
+                      '스텝 : $getStepInfo',
                     );
                     print('username 입력 : $signInUsernameController.text');
                     print('password 입력 : $signInPasswordController.text');
@@ -105,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         await apiGetProfile();
                         await apiGetWater();
                         await apiGetStep();
-                        Navigator.pushNamed(context, '/HomeScreen');
+                        Navigator.pushNamed(context, '/home');
                       }
                     }
                   },

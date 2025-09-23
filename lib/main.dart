@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myhealthdata/screen/s_home_navi.dart';
 import 'package:myhealthdata/screen/s_sign_in.dart';
-import 'package:myhealthdata/screen/s_profile_and_target.dart';
+import 'package:myhealthdata/screen/s_profile.dart';
 import 'package:myhealthdata/screen/s_sign_up.dart';
 import 'package:myhealthdata/screen/s_splash.dart';
 
@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
         '/splash': (context) => SplashScreen(),
         '/signIn': (context) => LoginScreen(),
         '/signUp': (context) => SignUpScreen(),
-        '/profileAndTarget': (context) => ProfileAndTarget(),
-        '/HomeScreen' : (context) => HomeScreenNB(),
+        '/profile': (context) => ProfileScreen(),
+        '/home' : (context) => HomeScreenNavigation(),
       },
     );
   }

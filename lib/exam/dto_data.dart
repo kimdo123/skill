@@ -1,4 +1,4 @@
-class ProfileDto {
+class ProfileDtoExam {
   String? mberId;
   String? sexdstn;
   int? height;
@@ -8,7 +8,7 @@ class ProfileDto {
   int? stepTarget;
   int? waterTarget;
 
-  ProfileDto({
+  ProfileDtoExam({
     this.mberId,
     this.sexdstn,
     this.height,
@@ -19,8 +19,8 @@ class ProfileDto {
     this.waterTarget,
   });
 
-  factory ProfileDto.fromJson(dynamic json) {
-    return ProfileDto(
+  factory ProfileDtoExam.fromJson(dynamic json) {
+    return ProfileDtoExam(
       mberId: json['mberId'] ?? '',
       sexdstn: json['sexdstn'] ?? '',
       height: json['height'] ?? 0,
@@ -32,7 +32,7 @@ class ProfileDto {
     );
   }
 
-  ProfileDto copyWith({
+  ProfileDtoExam copyWith({
     String? mberId,
     String? sexdstn,
     int? height,
@@ -42,7 +42,7 @@ class ProfileDto {
     int? stepTarget,
     int? waterTarget,
   }) {
-    return ProfileDto(
+    return ProfileDtoExam(
       mberId: mberId ?? this.mberId,
       sexdstn: sexdstn ?? this.sexdstn,
       height: height ?? this.height,

@@ -19,6 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late final TextEditingController signUpConfirmPasswordController; // x
 
   final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -123,7 +124,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 await apiGetProfile();
                                 Navigator.pushNamed(
                                   context,
-                                  '/profileAndTarget',
+                                  '/profile',
                                 );
                               } else {
                                 print('중복 아이디');

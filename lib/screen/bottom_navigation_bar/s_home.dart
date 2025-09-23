@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myhealthdata/api/api.dart';
+import 'package:myhealthdata/exam/dto_data.dart';
 import 'package:myhealthdata/util/variable.dart';
 import 'dart:math';
 
@@ -23,9 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
     // bmi 구하기
     // pow (A, B) : A 값을 B번 만큼 곱하기 (제곱)
     // A.toStringAsFixed(B) : A 값을 소수점 B 자리까지 반올림 처리 후 문자로
-    bmi =
-        getProfileInfo['data']['weight'] /
-        pow(getProfileInfo['data']['height'] * 0.01, 2);
+    final bmiWeight = ProfileDtoExam().weight ?? 0;
+    final bmiHeight = (ProfileDtoExam().height) ?? 0 / 100;
+    bmi = bmiWeight / pow(bmiHeight, 2);
     // water 현황 초기화
     getWaterInfo?['data']?['water'] = 0;
     // step 현황 초기화

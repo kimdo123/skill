@@ -18,7 +18,7 @@ Future<bool> apiSignIn(String userId, String password) async {
       body: {"mberId": userId, "mberPassword": password},
     );
     print('로그인 확인: $signIn');
-    // bool 타입이라 리턴 해줘야됨.
+    // bool 타입이라 리턴 해줘야됨
     return true;
   } catch (e) {
     print('에러: $e');
@@ -115,7 +115,6 @@ Future<void> apiGetWater() async {
     print('에러 $e');
   }
 }
-
 
 // ==================== Water [POST] ==================== //
 Future<void> apiPostWater(int plusWater) async {
