@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset('assets/symbol.svg'),
+                SvgPicture.asset('assets/logo.svg'),
                 SizedBox(height: 35),
                 Text(
                   'Please enter your information.',

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myhealthdata/api/api.dart';
 import 'package:myhealthdata/exam/dto_data.dart';
 import 'package:myhealthdata/util/variable.dart';
+import 'package:myhealthdata/widget/home/w_foods.dart';
 import 'dart:math';
 
 import 'package:myhealthdata/widget/w_baloon.dart';
@@ -44,8 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
    */
   Future<void> StepPlusRandom() async {
     // while : 걸음수 현황이 목표모다 작으면 계속 실행. 아니면 빠짐.
-    while (getStepInfo['data']['step'] <
-        getProfileInfo['data']['stepTarget']) {
+    while (getStepInfo['data']['step'] < getProfileInfo['data']['stepTarget']) {
       // 3초 대기
       await Future.delayed(Duration(seconds: 3));
       // 랜덤 숫자 0~10 생성
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(20),
                       ),
                       width: 370,
@@ -230,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(20),
                       ),
                       width: 370,
@@ -277,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(20),
                       ),
                       width: 370,
@@ -293,7 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 70,
                             height: 70,
                             child: Padding(
-                              padding: const EdgeInsets.all(17),
+                              padding: const EdgeInsets.all(15),
                               child: SvgPicture.asset('assets/heartrate.svg'),
                             ),
                           ),
@@ -338,22 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
                 /// Foods
-                Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text('Foods', style: TextStyle(fontSize: 30)),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      width: 370,
-                      height: 90,
-                    ),
-                  ],
-                ),
+                Foods(),
 
                 /// Water
                 Column(
@@ -364,7 +349,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(20),
                       ),
                       width: 370,

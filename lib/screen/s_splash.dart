@@ -77,11 +77,11 @@ class _SplashScreenState extends State<SplashScreen>
           children: [
             FadeTransition(
               opacity: _animation,
-              child: SvgPicture.asset('assets/symbol.svg'),
+              child: SvgPicture.asset('assets/logo.svg'),
             ),
             FadeTransition(
               opacity: _animationSecond,
-              child: Text('My Data Symbol', style: TextStyle(fontSize: 40)),
+              child: Text('My Data logo', style: TextStyle(fontSize: 40)),
             ),
           ],
         ),
