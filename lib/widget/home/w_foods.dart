@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:myhealthdata/util/common.dart';
 
 class Foods extends StatefulWidget {
@@ -41,55 +43,49 @@ class _FoodsState extends State<Foods> {
                   child: SvgPicture.asset('assets/food.svg'),
                 ),
               ),
-              picture(),
+              // 사진들
+              Container(
+                width: 200,
+                height: 70,
+                color: Colors.black,
+                child: picture(a),
+              )
             ],
           ),
         ),
       ],
     );
   }
-  Widget picture(){
+
+  final int a = Random().nextInt(8);
+
+  Widget picture(int a){
     return Padding(
-      padding: const EdgeInsets.only(top: 30.0),
-      child: ListView.builder(
-        itemBuilder: (context, index) => Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Image.asset(
-                pic[index],
-                width: 55,
-                height: 55,
-                fit: BoxFit.cover,
-              ),
+      padding: const EdgeInsets.all(10),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Image.asset(
+              foods[5], // 0 ~ 7
+              width: 60,
+              height: 60,
+              fit: BoxFit.cover,
             ),
-            Positioned(
-              top: 0,
-              right: 10,
-              child: GestureDetector(
-                onTap: () {
-                  pic.removeAt(index);
-                },
-                child: Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                  ),
-                  child: Icon(Icons.close, size: 16),
-                ),
-              ),
-            ),
-          ],
-        ),
-        itemCount: pic.length,
-        scrollDirection: Axis.horizontal,
+          )
+        ],
       ),
     );
   }
   List<String> foods = [
-    
-  ]
+    'assets/foods/breakfast.jpg',
+    'assets/foods/burger.jpg',
+    'assets/foods/chocolate.jpg',
+    'assets/foods/food.jpg',
+    'assets/foods/pizza.jpg',
+    'assets/foods/ramen.jpg',
+    'assets/foods/sandwich.jpg',
+    'assets/foods/watermelon.jpg',
+  ];
 
 }
